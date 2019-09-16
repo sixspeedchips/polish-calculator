@@ -9,10 +9,13 @@ public class Main {
 
     Calculator calculator = new ReversePolishCalculator();
     calculator.calculate("1 1 +");
-    String x = "  1 1 23 5";
-
-    System.out.println(Arrays.toString(x.strip().split(" ")));
-
+//    calculator.calculate("4 1 +");
+//    calculator.calculate("1 -70 +");
+//    calculator.calculate("7 1 +");
+//    calculator.calculate("99 1 +");
+//    calculator.calculate("10 1 +");
+//    calculator.calculate("1 10 +");
+//    calculator.calculate("-5 12 +");
   }
 
 }
