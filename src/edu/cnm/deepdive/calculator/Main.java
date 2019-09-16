@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.calculator;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Main {
 
@@ -9,13 +10,33 @@ public class Main {
 
     Calculator calculator = new ReversePolishCalculator();
     calculator.calculate("1 1 +");
-//    calculator.calculate("4 1 +");
-//    calculator.calculate("1 -70 +");
-//    calculator.calculate("7 1 +");
-//    calculator.calculate("99 1 +");
-//    calculator.calculate("10 1 +");
-//    calculator.calculate("1 10 +");
-//    calculator.calculate("-5 12 +");
+    String x = "  1 1 23 5";
+
+    String[] arrayofs x.strip().split(" ");
+    LinkedList<String> stack = new LinkedList<>(String);
+    for (ele : arrayofs){
+      if (ele == "+"){
+        int op1 = Integer.parseInt(stack.pop());
+        int op2 = Integer.parseInt(stack.pop());
+        stack.push(String.valueOf(op1+op2));
+      } else if (ele == "-"){
+        int op1 = Integer.parseInt(stack.pop());
+        int op2 = Integer.parseInt(stack.pop());
+        stack.push(String.valueOf(op1-op2));
+      } else if (ele == "*"){
+        int op1 = Integer.parseInt(stack.pop());
+        int op2 = Integer.parseInt(stack.pop());
+        stack.push(String.valueOf(op1*op2));
+      } else if (ele == "/"){
+        int op1 = Integer.parseInt(stack.pop());
+        int op2 = Integer.parseInt(stack.pop());
+        stack.push(String.valueOf(op1/op2));
+      } else{
+        stack.push(ele);
+      }
+    }
+    System.out.println(stack);
+
   }
 
 }
