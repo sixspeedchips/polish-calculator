@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.calculator;
 
+import java.util.Arrays;
+
 public class Main {
 
   public static void main(String[] args) {
@@ -7,6 +9,9 @@ public class Main {
 
     Calculator calculator = new ReversePolishCalculator();
     calculator.calculate("1 1 +");
+    String x = "  1 1 23 5";
+
+    System.out.println(Arrays.toString(x.strip().split(" ")));
 
   }
 
