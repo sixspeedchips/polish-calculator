@@ -1,47 +1,52 @@
 package edu.cnm.deepdive.calculator;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class ReversePolishCalculator implements Calculator {
 
+  LinkedList<Double> stack;
+
+
   @Override
   public Double calculate(String postfixString) {
 
+    stack = new LinkedList<>();
+
     String[] parsed = parse(postfixString);
-    System.out.println(Arrays.toString(parsed));
-    return null;
+
+    for (String ele : parsed) {
+      try {
+        stack.push(Double.parseDouble(ele));
+      } catch (NumberFormatException e) {
+        operate(ele);
+      }
+
+    }
+    return stack.peek();
   }
 
   private String[] parse(String inputString) {
     return inputString.strip().split(" ");
   }
 
-  String x = "  1 1 23 5";
 
-  String[] arrayofs x.strip().split(" ");
-  LinkedList<String> stack = new LinkedList<>(String);
-    for (ele : arrayofs){
-    if (ele == "+"){
-      int op1 = Integer.parseInt(stack.pop());
-      int op2 = Integer.parseInt(stack.pop());
-      stack.push(String.valueOf(op1+op2));
-    } else if (ele == "-"){
-      int op1 = Integer.parseInt(stack.pop());
-      int op2 = Integer.parseInt(stack.pop());
-      stack.push(String.valueOf(op1-op2));
-    } else if (ele == "*"){
-      int op1 = Integer.parseInt(stack.pop());
-      int op2 = Integer.parseInt(stack.pop());
-      stack.push(String.valueOf(op1*op2));
-    } else if (ele == "/"){
-      int op1 = Integer.parseInt(stack.pop());
-      int op2 = Integer.parseInt(stack.pop());
-      stack.push(String.valueOf(op1/op2));
-    } else{
-      stack.push(ele);
+  private void operate(String s){
+
+    if(s.equals("*")){
+      stack.push(stack.pop()*stack.pop());
+    }
+    else if(s.equals("+")){
+      stack.push(stack.pop()+stack.pop());
+    }
+    else if(s.equals("/")){
+//      Double temp = stack.pop();
+      stack.push(stack.pop()/stack.pop());
+    }
+    else if(s.equals("-")){
+//      Double temp = stack.pop();
+      stack.push(stack.pop()-stack.pop());
+
     }
   }
-    System.out.println(stack);
 
 }
