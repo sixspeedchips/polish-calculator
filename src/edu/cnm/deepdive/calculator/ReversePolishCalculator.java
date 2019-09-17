@@ -2,19 +2,14 @@ package edu.cnm.deepdive.calculator;
 
 import java.util.LinkedList;
 
-public class ReversePolishCalculator implements Calculator {
+public class ReversePolishCalculator {
 
-  LinkedList<Double> stack;
+  private static final LinkedList<Double> stack = new LinkedList<>();
 
+  static Double calculate(String postfixString) {
 
-  @Override
-  public Double calculate(String postfixString) {
-
-    stack = new LinkedList<>();
-
-    String[] parsed = parse(postfixString);
-
-    for (String ele : parsed) {
+    stack.clear();
+    for (String ele : parse(postfixString)) {
       try {
         stack.push(Double.parseDouble(ele));
       } catch (NumberFormatException e) {
@@ -25,27 +20,27 @@ public class ReversePolishCalculator implements Calculator {
     return stack.peek();
   }
 
-  private String[] parse(String inputString) {
+  private static String[] parse(String inputString) {
     return inputString.strip().split(" ");
   }
 
 
-  private void operate(String s){
+  private static void operate(String s){
 
-    if(s.equals("*")){
-      stack.push(stack.pop()*stack.pop());
-    }
-    else if(s.equals("+")){
-      stack.push(stack.pop()+stack.pop());
-    }
-    else if(s.equals("/")){
-//      Double temp = stack.pop();
-      stack.push(stack.pop()/stack.pop());
-    }
-    else if(s.equals("-")){
-//      Double temp = stack.pop();
-      stack.push(stack.pop()-stack.pop());
+    switch (s) {
+      case "*":
+        stack.push(stack.pop() * stack.pop());
+        break;
+      case "+":
+        stack.push(stack.pop() + stack.pop());
+        break;
+      case "/":
+        stack.push(stack.pop() / stack.pop());
+        break;
+      case "-":
+        stack.push(stack.pop() - stack.pop());
 
+        break;
     }
   }
 
