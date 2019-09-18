@@ -1,47 +1,28 @@
 package edu.cnm.deepdive.calculator;
-
+import static edu.cnm.deepdive.calculator.Operations.operators;
 import java.util.LinkedList;
 
-public class ReversePolishCalculator {
+class ReversePolishCalculator {
 
   private static final LinkedList<Double> stack = new LinkedList<>();
 
   static Double calculate(String postfixString) {
 
     stack.clear();
-    for (String ele : parse(postfixString)) {
+    for (String token : parse(postfixString)) {
       try {
-        stack.push(Double.parseDouble(ele));
+        stack.push(Double.parseDouble(token));
       } catch (NumberFormatException e) {
-        operate(ele);
+        operators.get(token).operate(stack);
       }
 
     }
+
     return stack.peek();
   }
 
   private static String[] parse(String inputString) {
     return inputString.strip().split(" ");
-  }
-
-
-  private static void operate(String s){
-
-    switch (s) {
-      case "*":
-        stack.push(stack.pop() * stack.pop());
-        break;
-      case "+":
-        stack.push(stack.pop() + stack.pop());
-        break;
-      case "/":
-        stack.push(stack.pop() / stack.pop());
-        break;
-      case "-":
-        stack.push(stack.pop() - stack.pop());
-
-        break;
-    }
   }
 
 }
